@@ -1,6 +1,7 @@
 package org.GreenCat.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,6 +22,12 @@ public class WordStatisticsTest {
 		Stats stats = WordStatistics.getWordCounts("an accent\u00e9d word", new ArrayList<>());
 		Assert.assertEquals(Integer.valueOf(1), stats.wordCounts.get("accent\u00e9d"));
 		
+	}
+	
+	@Test
+	public void testFilteredWords() throws Exception {
+		Stats stats = WordStatistics.getWordCounts("<html><head></head><body><p>this is a test</p></body></html>", Arrays.asList("html","head","body","p"));
+		Assert.assertEquals(Integer.valueOf(4), stats.numberofWordsOnPage);		
 	}
 
 }
