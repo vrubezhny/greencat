@@ -1,0 +1,79 @@
+<div class="form-horizontal">
+    <h3>Create a new Words</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Words/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for Words</h3>
+    <form id="WordsSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="word" class="col-sm-2 control-label">Word</label>
+        <div class="col-sm-10">
+            <input id="word" name="word" class="form-control" type="text" ng-model="search.word" placeholder="Enter the Words Word"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="count" class="col-sm-2 control-label">Count</label>
+        <div class="col-sm-10">
+            <input id="count" name="count" class="form-control" type="text" ng-model="search.count" placeholder="Enter the Words Count"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="filtered" class="col-sm-2 control-label">Filtered</label>
+        <div class="col-sm-10">
+            <select id="filtered" name="filtered" class="form-control" ng-model="search.filtered" ng-options="f as f for f in filteredList">
+                <option value="">Choose a Filtered</option>
+            </select>
+        </div>
+    </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Count</th>
+                    <th>Filtered</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in filteredResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/Words/edit/{{result.id}}">{{result.word}}</a></td>
+                    <td><a href="#/Words/edit/{{result.id}}">{{result.count}}</a></td>
+                    <td><a href="#/Words/edit/{{result.id}}">{{result.filtered}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>

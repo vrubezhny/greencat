@@ -1,0 +1,47 @@
+<header ng-switch on="$location.path().indexOf('/Words/new') > -1">
+    <h3 ng-switch-when="true">Create a new Words</h3>
+    <h3 ng-switch-when="false">View or edit Words</h3>
+</header>
+<form id="WordsForm" name="WordsForm" class="form-horizontal" role="form">
+    
+
+    <div class="form-group" ng-class="{'has-error': WordsForm.word.$invalid}">
+        <label for="word" class="col-sm-2 control-label">Word</label>
+        <div id="wordControls" class="col-sm-10">
+            <input id="word" name="word" type="text" class="form-control" ng-model="words.word" placeholder="Enter the Words Word"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': WordsForm.count.$invalid}">
+        <label for="count" class="col-sm-2 control-label">Count</label>
+        <div id="countControls" class="col-sm-10">
+            <input id="count" name="count" type="number" class="form-control" ng-model="words.count" placeholder="Enter the Words Count"></input>
+            <span class="help-block error" ng-show="WordsForm.count.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': WordsForm.filtered.$invalid}">
+        <label for="filtered" class="col-sm-2 control-label">Filtered</label>
+        <div id="filteredControls" class="col-sm-10">
+            <input id="filtered" name="filtered" type="checkbox" class="checkbox" ng-model="words.filtered" placeholder="Enter the Words Filtered"></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': WordsForm.websitesId.$invalid}">
+        <label for="websitesId" class="col-sm-2 control-label">Websites Id</label>
+        <div id="websitesIdControls" class="col-sm-10">
+            <select id="websitesId" name="websitesId" multiple class="form-control" ng-model="websitesIdSelection" ng-options="w.text for w in websitesIdSelectionList">
+                <option value="">Choose a Websites Id</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveWords" name="saveWords" class="btn btn-primary" ng-disabled="isClean() || WordsForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteWords" name="deleteWords" class="btn btn-danger" ng-show="words.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>
