@@ -30,4 +30,12 @@ public class WordStatisticsTest {
 		Assert.assertEquals(Integer.valueOf(4), stats.numberofWordsOnPage);		
 	}
 
+	@Test
+	public void testMixedCaseWords() throws Exception {
+		Stats stats = WordStatistics.getWordCounts("miXed cAse MIXed case mixed CASE MIXEd CAsE", Arrays.asList("html","head","body","p"));
+		Assert.assertEquals(Integer.valueOf(8), stats.numberofWordsOnPage);		
+		Assert.assertEquals(Integer.valueOf(4), stats.wordCounts.get("mixed"));
+		Assert.assertEquals(Integer.valueOf(4), stats.wordCounts.get("case"));
+	}
+
 }

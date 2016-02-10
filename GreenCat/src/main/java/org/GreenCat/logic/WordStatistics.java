@@ -14,7 +14,7 @@ public class WordStatistics {
 		//Pattern pattern = Pattern.compile("(\\P{M}\\p{M}*)+");
 		//Pattern pattern = Pattern.compile("\\X+");
 		Pattern pattern = Pattern.compile("\\p{L}+");
-		Matcher matcher = pattern.matcher(document);
+		Matcher matcher = pattern.matcher(document.toLowerCase());
 		while (matcher.find())
 		{
 			String word = matcher.group();
