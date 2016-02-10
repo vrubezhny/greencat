@@ -25,6 +25,9 @@ public class Websites implements Serializable {
 	@ManyToMany
 	private Set<Words> wordsId = new HashSet<Words>();
 
+	@Column
+	private String url;
+
 	public Long getId() {
 		return this.id;
 	}
@@ -39,14 +42,6 @@ public class Websites implements Serializable {
 
 	public void setVersion(final int version) {
 		this.version = version;
-	}
-
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (id != null)
-			result += "id: " + id;
-		return result;
 	}
 
 	@Override
@@ -80,5 +75,21 @@ public class Websites implements Serializable {
 
 	public void setWordsId(final Set<Words> wordsId) {
 		this.wordsId = wordsId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		String result = getClass().getSimpleName() + " ";
+		if (url != null && !url.trim().isEmpty())
+			result += "url: " + url;
+		return result;
 	}
 }
